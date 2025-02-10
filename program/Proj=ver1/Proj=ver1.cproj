@@ -141,6 +141,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Motor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="vl53l0x.h">
       <SubType>compile</SubType>
     </Compile>

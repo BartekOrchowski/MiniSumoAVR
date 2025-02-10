@@ -1,5 +1,22 @@
 #include "DistanceSensor.h"
 
+
+void Timer1_Init(void)
+{
+	// Ustawienie trybu CTC (WGM12 = 1, WGM11 i WGM10 = 0)
+	TCCR1A = 0;
+	TCCR1B = (1 << WGM12);  // Tryb CTC
+
+	// Ustawienie prescalera na 64 (CS11 = 1, CS10 = 1)
+	TCCR1B |= (1 << CS11) | (1 << CS10);
+
+	// Ustawienie wartoœci porównania OCR1A
+	OCR1A = 49999;
+
+	// W³¹czenie przerwañ dla Compare Match A
+	TIMSK1 |= (1 << OCIE1A);
+}
+
 // XSHUT Initialization
 void Xshut_Init(void)
 {

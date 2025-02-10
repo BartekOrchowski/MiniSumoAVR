@@ -2,10 +2,12 @@
 
 #include <stdint.h>
 #include <avr/io.h>
-#include <avr/delay.h>				/////////////////////////////////////////////zmienic na timer 10ms 
+#include <avr/delay.h>				
 
 #include "vl53l0x.h"
 #include "I2C.h"
+
+void Timer1_Init(void); 
 
 //Distance sensors
 // XSHUT pins (dla czujników VL53L0X)
