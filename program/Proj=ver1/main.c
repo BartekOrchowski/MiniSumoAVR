@@ -14,8 +14,6 @@ int main(void)
 	sei(); // W³¹czenie przerwañ, jeœli s¹ potrzebne
 
 	Motor_Init(); // Inicjalizacja silników
-	DDRD |= (1 << PD5); // Wymuszenie PD5 jako wyjœcia
-	PORTD &= ~(1 << PD5); // Wy³¹czenie wszelkich stanów pocz¹tkowych
 
 	// Ustawienie kierunku obrotu lewego silnika (PC2 i PC3)
 	PORTC |= (1 << PC2);
