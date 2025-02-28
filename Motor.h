@@ -3,8 +3,7 @@
 #include <stdint.h>
 #include <avr/io.h>
 
-	void Timer0_Init(void);
-  //Init for both motors
+  //DIR_1 i DIR_2 init for both drivers
   void Motor_Init(void);
   
   

@@ -1,6 +1,6 @@
 #include <avr/io.h>
 #include <stdint.h>
-#include <avr/delay.h>
+#include <util/delay.h>
 #include <avr/interrupt.h>
 #include "LineSensor.h"
 #include "DistanceSensor.h"
@@ -11,53 +11,34 @@
 	
 int main(void)
 {
-	// Interrupts enable
-	sei();
-	
-	// Line sensor config
-	LineSensor_Init();
+	sei(); // W³¹czenie przerwañ, jeœli s¹ potrzebne
 
-	// I2C config
-	I2C_Init();
-	
-	// Distance sensors config
-	Xshut_Init();
-	DistanceSensor_Init();
-	//Timeline 
-	Timer1_Init();
-	
-	//Motor config
-	Motor_Init();
+	Motor_Init(); // Inicjalizacja silników
+	DDRD |= (1 << PD5); // Wymuszenie PD5 jako wyjœcia
+	PORTD &= ~(1 << PD5); // Wy³¹czenie wszelkich stanów pocz¹tkowych
+
+	// Ustawienie kierunku obrotu lewego silnika (PC2 i PC3)
+	PORTC |= (1 << PC2);
+	PORTC &= ~(1 << PC3);
+
+	// Ustawienie kierunku obrotu prawego silnika (PD4 i PD7)
+	PORTD |= (1 << PD4);
+	PORTD &= ~(1 << PD7);
 	
 	while (1)
 	{
-		if(LineSensor_Read())
-		{
-			// GoBack();
-		}
+		//// Tylko lewy silnik na pe³nej mocy
+		OCR0A = 128;  // Pe³na moc dla lewego silnika
+		OCR0B = 128;    // Prawy silnik wy³¹czony
+		_delay_ms(2000);
 
-		if((distance1 == 0) && (distance2 == 0) && (distance3 == 0) && (distance4 == 0)) //noone spotted 
-		{
-			//MotorDriver_Spin();
-		}
-		
-		if ((distance3 < distance2) && (distance3 < distance1) && (distance3 < distance4)) //if oponent on the right
-		{
-			while((distance1-TOLERANCE)<(distance2-TOLERANCE)) 
-			{
-				//MotorDriver_GoRight();
-			}
-		}
-		
-		if ((distance4 < distance2) && (distance4 < distance1) && (distance4 < distance3)) //if oponent on the left
-		{
-			while((distance1-TOLERANCE)<(distance2-TOLERANCE))
-			{
-				//MotorDriver_GoLeft();
-			}
-		}		
+		//// Tylko prawy silnik na pe³nej mocy
+		OCR0A = 255;    // Lewy silnik wy³¹czony
+		OCR0B = 128;  // Pe³na moc dla prawego silnika
+		_delay_ms(2000);
 	}
 }
+
 
 volatile uint16_t distance1;
 volatile uint16_t distance2;
@@ -72,3 +53,4 @@ ISR(TIMER1_COMPA_vect)
 	distance4 = DistanceSensor_Read(SENSOR4_ADDR);	//pb2	left sensor x4
 	
 }
+
