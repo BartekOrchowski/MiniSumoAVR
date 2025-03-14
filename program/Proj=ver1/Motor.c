@@ -1,9 +1,13 @@
 #include "Motor.h"
 
+//#define TEST 
+
   // Inicjalizacja Timer0 do generowania PWM na PD6 (OC0A) i PD5 (OC0B)
   void Timer0_Init()
   {
 	  // Ustawienie Fast PWM (WGM02 = 0, WGM01 = 1, WGM00 = 1)
+	  TCCR0A = 0;
+	  TCCR0B = 0;
 	  TCCR0A |= (1 << WGM00) | (1 << WGM01);
 	  TCCR0B &= ~(1 << WGM02); // Upewnij siê, ¿e WGM02 jest wyzerowane
 	  TCCR0B |= (1 << CS01) | (1 << CS00);  // Prescaler 64
@@ -27,3 +31,72 @@
 	  DDRC |= (1 << PC2) | (1 << PC3);
 	  DDRD |= (1 << PD4) | (1 << PD7);
   }
+  
+  void Motor_Backwards(void)
+  {
+	  //kierunek w tyl
+	  PORTD &= ~(1 << PD4);
+	  PORTD |= (1 << PD7);
+	  PORTC &= ~(1 << PC2);
+	  PORTC |= (1 << PC3);
+	  
+	  OCR0A = 255;    // Pe³na moc dla lewego silnika
+	  OCR0B = 255;  // Pe³na moc dla prawego silnika	  
+  }
+  
+  void Motor_Straight(void)
+  {
+	  //kierunek w przod
+	  PORTD |= (1 << PD4);
+	  PORTD &= ~(1 << PD7);
+	  PORTC |= (1 << PC2);
+	  PORTC &= ~(1 << PC3);
+	  
+	  OCR0A = 255;    // Pe³na moc dla lewego silnika
+	  OCR0B = 255;  // Pe³na moc dla prawego silnika
+  }
+  
+  void Motor_Left(void)
+  {
+	  
+  }
+  
+  void Motor_Right(void)
+  {
+	  
+  }
+  
+  void Motor_Circle(void)
+  {
+	  PORTD &= ~(1 << PD4);
+	  PORTD |= (1 << PD7);
+	  PORTC |= (1 << PC2);
+	  PORTC &= ~(1 << PC3);
+	  
+	  OCR0A = 255;    // Pe³na moc dla lewego silnika
+	  OCR0B = 255;  // Pe³na moc dla prawego silnika
+	  
+  }
+  
+  #ifdef TEST
+   void Motor_Test(void)
+   {
+	   //// Tylko lewy silnik na pe³nej mocy
+	   OCR0A = 255;  // Pe³na moc dla lewego silnika
+	   OCR0B = 128;    // Prawy silnik wy³¹czony
+	   PORTD |= (1 << PD4);
+	   PORTD &= ~(1 << PD7);
+	   PORTC |= (1 << PC2);
+	   PORTC &= ~(1 << PC3);
+	   _delay_ms(200);
+
+	   //// Tylko prawy silnik na pe³nej mocy
+	   OCR0A = 128;    // Lewy silnik wy³¹czony
+	   OCR0B = 255;  // Pe³na moc dla prawego silnika
+	   PORTD &= ~(1 << PD4);
+	   PORTD |= (1 << PD7);
+	   PORTC &= ~(1 << PC2);
+	   PORTC |= (1 << PC3);
+	   _delay_ms(200);
+   }
+   #endif
