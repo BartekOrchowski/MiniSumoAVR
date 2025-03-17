@@ -58,12 +58,26 @@
   
   void Motor_Left(void)
   {
+	  //kierunek w przod
+	  PORTD |= (1 << PD4);
+	  PORTD &= ~(1 << PD7);
+	  PORTC |= (1 << PC2);
+	  PORTC &= ~(1 << PC3);
 	  
+	  OCR0A = 128;    
+	  OCR0B = 255;	// Pe³na moc dla prawego silnika
   }
   
   void Motor_Right(void)
   {
+	  //kierunek w przod
+	  PORTD |= (1 << PD4);
+	  PORTD &= ~(1 << PD7);
+	  PORTC |= (1 << PC2);
+	  PORTC &= ~(1 << PC3);
 	  
+	  OCR0A = 255;   // Pe³na moc dla lewego silnika 
+	  OCR0B = 128;	
   }
   
   void Motor_Circle(void)
@@ -98,5 +112,15 @@
 	   PORTC &= ~(1 << PC2);
 	   PORTC |= (1 << PC3);
 	   _delay_ms(200);
+	   Motor_Backwards();
+	   _delay_ms(100);
+	   Motor_Circle();
+	   _delay_ms(100);
+	   Motor_Left();
+	   _delay_ms(100);
+	   Motor_Right();
+	   _delay_ms(100);
+	   Motor_Straight();
+	   _delay_ms(100);
    }
    #endif
