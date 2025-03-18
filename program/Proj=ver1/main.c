@@ -37,48 +37,48 @@ int main(void)
 	
 	while (1)
 	{	
-		//// Prosta logika sterowania silnikami
-		//if (distance1 < 100 || distance2 < 100) // Przeszkoda z przodu
-		//{
-		//current_direction = DIRECTION_FORWARD;
-		//}
-		//else if (distance3 < 100) // Przeszkoda z prawej strony
-		//{
-		//current_direction = DIRECTION_RIGHT;
-		//}
-		//else if (distance4 < 100) // Przeszkoda z lewej strony
-		//{
-		//current_direction = DIRECTION_LEFT;
-		//}
-		//else
-		//{
-		//current_direction = DIRECTION_CIRCLE;
-		//}
+		// Prosta logika sterowania silnikami
+		if (distance1 < 100 || distance2 < 100) // Przeszkoda z przodu
+		{
+		current_direction = DIRECTION_FORWARD;
+		}
+		else if (distance3 < 100) // Przeszkoda z prawej strony
+		{
+		current_direction = DIRECTION_RIGHT;
+		}
+		else if (distance4 < 100) // Przeszkoda z lewej strony
+		{
+		current_direction = DIRECTION_LEFT;
+		}
+		else
+		{
+		current_direction = DIRECTION_CIRCLE;
+		}
 		
-		//switch (current_direction)
-		//{
-			////case DIRECTION_FORWARD:
-			////Motor_Straight();
-			////break;
-			////case DIRECTION_RIGHT:
-			////Motor_Right();
-			////break;
-			////case DIRECTION_LEFT:
-			////Motor_Left();
-			////break;
-			////case DIRECTION_CIRCLE:
-			////Motor_Circle();
-			////break;
-			//case DIRECTION_BACKWARD:
-			//Motor_Backwards();
-			//break;
-		//}
+		switch (current_direction)
+		{
+			case DIRECTION_FORWARD:
+			Motor_Straight();
+			break;
+			case DIRECTION_RIGHT:
+			Motor_Right();
+			break;
+			case DIRECTION_LEFT:
+			Motor_Left();
+			break;
+			case DIRECTION_CIRCLE:
+			Motor_Circle();
+			break;
+			case DIRECTION_BACKWARD:
+			Motor_Backwards();
+			break;
+		}
 	}
 }
 
 ISR(TIMER1_OVF_vect)
 {
-	if(LineSensor_Read()==1)
+	if(LineSensor_Read()==0)
 	{
 		current_direction = DIRECTION_FORWARD;
 	}
