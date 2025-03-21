@@ -3,31 +3,31 @@ Proj=ver1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  0000044e  2**0
+  0 .data         00000000  00800100  00800100  00000514  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000003da  00000000  00000000  00000074  2**1
+  1 .text         000004a0  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000009  00800100  00800100  0000044e  2**0
+  2 .bss          00000009  00800100  00800100  00000514  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000044e  2**0
+  3 .comment      00000030  00000000  00000000  00000514  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000480  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000544  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000150  00000000  00000000  000004c0  2**0
+  5 .debug_aranges 00000150  00000000  00000000  00000584  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000fff  00000000  00000000  00000610  2**0
+  6 .debug_info   00001058  00000000  00000000  000006d4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000095a  00000000  00000000  0000160f  2**0
+  7 .debug_abbrev 0000097e  00000000  00000000  0000172c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000009f3  00000000  00000000  00001f69  2**0
+  8 .debug_line   00000a0b  00000000  00000000  000020aa  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000274  00000000  00000000  0000295c  2**2
+  9 .debug_frame  00000274  00000000  00000000  00002ab8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000005b0  00000000  00000000  00002bd0  2**0
+ 10 .debug_str    000005b0  00000000  00000000  00002d2c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000002b8  00000000  00000000  00003180  2**0
+ 11 .debug_loc    000002b8  00000000  00000000  000032dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000100  00000000  00000000  00003438  2**0
+ 12 .debug_ranges 00000100  00000000  00000000  00003594  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -46,7 +46,7 @@ Disassembly of section .text:
   28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
-  34:	0c 94 f6 00 	jmp	0x1ec	; 0x1ec <__vector_13>
+  34:	0c 94 41 01 	jmp	0x282	; 0x282 <__vector_13>
   38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
@@ -81,8 +81,8 @@ Disassembly of section .text:
   7e:	a9 30       	cpi	r26, 0x09	; 9
   80:	b2 07       	cpc	r27, r18
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
-  84:	0e 94 2a 01 	call	0x254	; 0x254 <main>
-  88:	0c 94 eb 01 	jmp	0x3d6	; 0x3d6 <_exit>
+  84:	0e 94 91 01 	call	0x322	; 0x322 <main>
+  88:	0c 94 4e 02 	jmp	0x49c	; 0x49c <_exit>
 
 0000008c <__bad_interrupt>:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -191,19 +191,19 @@ void DistanceSensor_SetAddr(uint8_t new_address)
  104:	cf 93       	push	r28
  106:	c8 2f       	mov	r28, r24
 	I2C_Start();
- 108:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <I2C_Start>
+ 108:	0e 94 08 01 	call	0x210	; 0x210 <I2C_Start>
 	I2C_Write(0x52); // Default address (0x29 shifted left)
  10c:	82 e5       	ldi	r24, 0x52	; 82
- 10e:	0e 94 dd 00 	call	0x1ba	; 0x1ba <I2C_Write>
+ 10e:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
 	I2C_Write(0x8A); // Address register
  112:	8a e8       	ldi	r24, 0x8A	; 138
- 114:	0e 94 dd 00 	call	0x1ba	; 0x1ba <I2C_Write>
+ 114:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
 	I2C_Write(new_address << 1); // New address shifted left
  118:	8c 2f       	mov	r24, r28
  11a:	88 0f       	add	r24, r24
- 11c:	0e 94 dd 00 	call	0x1ba	; 0x1ba <I2C_Write>
+ 11c:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
 	I2C_Stop();
- 120:	0e 94 d9 00 	call	0x1b2	; 0x1b2 <I2C_Stop>
+ 120:	0e 94 10 01 	call	0x220	; 0x220 <I2C_Stop>
 }
  124:	cf 91       	pop	r28
  126:	08 95       	ret
@@ -286,495 +286,616 @@ void DistanceSensor_Init(void)
  19c:	0e 94 71 00 	call	0xe2	; 0xe2 <Xshut_EnableB>
  1a0:	08 95       	ret
 
-000001a2 <I2C_Start>:
+000001a2 <DistanceSensor_Read>:
+	I2C_Write(new_address << 1); // New address shifted left
+	I2C_Stop();
+}
+
+uint16_t DistanceSensor_Read(uint8_t sensor_address)
+{
+ 1a2:	1f 93       	push	r17
+ 1a4:	cf 93       	push	r28
+ 1a6:	df 93       	push	r29
+ 1a8:	c8 2f       	mov	r28, r24
+	uint8_t distance_high, distance_low;
+
+	// Start reading from the sensor
+	I2C_Start();
+ 1aa:	0e 94 08 01 	call	0x210	; 0x210 <I2C_Start>
+	I2C_Write(sensor_address << 1);
+ 1ae:	1c 2f       	mov	r17, r28
+ 1b0:	11 0f       	add	r17, r17
+ 1b2:	81 2f       	mov	r24, r17
+ 1b4:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
+	I2C_Write(0x1E); // High byte register
+ 1b8:	8e e1       	ldi	r24, 0x1E	; 30
+ 1ba:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
+	I2C_Start();
+ 1be:	0e 94 08 01 	call	0x210	; 0x210 <I2C_Start>
+	I2C_Write((sensor_address << 1) | 0x01);
+ 1c2:	8c 2f       	mov	r24, r28
+ 1c4:	90 e0       	ldi	r25, 0x00	; 0
+ 1c6:	88 0f       	add	r24, r24
+ 1c8:	99 1f       	adc	r25, r25
+ 1ca:	c8 2f       	mov	r28, r24
+ 1cc:	c1 60       	ori	r28, 0x01	; 1
+ 1ce:	8c 2f       	mov	r24, r28
+ 1d0:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
+	distance_high = I2C_ReadAck();
+ 1d4:	0e 94 1e 01 	call	0x23c	; 0x23c <I2C_ReadAck>
+ 1d8:	d8 2f       	mov	r29, r24
+
+	I2C_Start();
+ 1da:	0e 94 08 01 	call	0x210	; 0x210 <I2C_Start>
+	I2C_Write(sensor_address << 1);
+ 1de:	81 2f       	mov	r24, r17
+ 1e0:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
+	I2C_Write(0x1F); // Low byte register
+ 1e4:	8f e1       	ldi	r24, 0x1F	; 31
+ 1e6:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
+	I2C_Start();
+ 1ea:	0e 94 08 01 	call	0x210	; 0x210 <I2C_Start>
+	I2C_Write((sensor_address << 1) | 0x01);
+ 1ee:	8c 2f       	mov	r24, r28
+ 1f0:	0e 94 14 01 	call	0x228	; 0x228 <I2C_Write>
+	distance_low = I2C_ReadNack();
+ 1f4:	0e 94 28 01 	call	0x250	; 0x250 <I2C_ReadNack>
+ 1f8:	c8 2f       	mov	r28, r24
+	I2C_Stop();
+ 1fa:	0e 94 10 01 	call	0x220	; 0x220 <I2C_Stop>
+
+	return (distance_high << 8) | distance_low;
+ 1fe:	8d 2f       	mov	r24, r29
+ 200:	90 e0       	ldi	r25, 0x00	; 0
+ 202:	98 2f       	mov	r25, r24
+ 204:	88 27       	eor	r24, r24
+}
+ 206:	8c 2b       	or	r24, r28
+ 208:	df 91       	pop	r29
+ 20a:	cf 91       	pop	r28
+ 20c:	1f 91       	pop	r17
+ 20e:	08 95       	ret
+
+00000210 <I2C_Start>:
 }
 
 // Wysy³anie bitu startu
 void I2C_Start(void)
 {
 	TWCR = (1 << TWSTA) | (1 << TWEN) | (1 << TWINT); 
- 1a2:	84 ea       	ldi	r24, 0xA4	; 164
- 1a4:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 210:	84 ea       	ldi	r24, 0xA4	; 164
+ 212:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 
 	// Czekanie az preryferium zakonczy prace
 	while (!(TWCR & (1 << TWINT))); 
- 1a8:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 1ac:	88 23       	and	r24, r24
- 1ae:	e4 f7       	brge	.-8      	; 0x1a8 <I2C_Start+0x6>
+ 216:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 21a:	88 23       	and	r24, r24
+ 21c:	e4 f7       	brge	.-8      	; 0x216 <I2C_Start+0x6>
 }
- 1b0:	08 95       	ret
+ 21e:	08 95       	ret
 
-000001b2 <I2C_Stop>:
+00000220 <I2C_Stop>:
 
 // Wys³anie bitu stopu
 void I2C_Stop(void)
 {
 	TWCR = (1 << TWSTO) | (1 << TWEN) | (1 << TWINT);
- 1b2:	84 e9       	ldi	r24, 0x94	; 148
- 1b4:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 1b8:	08 95       	ret
+ 220:	84 e9       	ldi	r24, 0x94	; 148
+ 222:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 226:	08 95       	ret
 
-000001ba <I2C_Write>:
+00000228 <I2C_Write>:
 }
 
 // Wpisanie danych na rejsetr
 void I2C_Write(uint8_t data)
 {
 	TWDR = data;
- 1ba:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 228:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
 	TWCR = (1 << TWEN) | (1 << TWINT);
- 1be:	84 e8       	ldi	r24, 0x84	; 132
- 1c0:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 22c:	84 e8       	ldi	r24, 0x84	; 132
+ 22e:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 	
 	while (!(TWCR & (1 << TWINT)));
- 1c4:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 1c8:	88 23       	and	r24, r24
- 1ca:	e4 f7       	brge	.-8      	; 0x1c4 <I2C_Write+0xa>
+ 232:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 236:	88 23       	and	r24, r24
+ 238:	e4 f7       	brge	.-8      	; 0x232 <I2C_Write+0xa>
 }
- 1cc:	08 95       	ret
+ 23a:	08 95       	ret
 
-000001ce <LineSensor_Init>:
+0000023c <I2C_ReadAck>:
+
+// Zwrot bitu ACK na magistrale po odczycie
+uint8_t I2C_ReadAck(void)
+{
+	// Read data with ACK
+	TWCR = (1 << TWEN) | (1 << TWINT) | (1 << TWEA);
+ 23c:	84 ec       	ldi	r24, 0xC4	; 196
+ 23e:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+	while (!(TWCR & (1 << TWINT)));
+ 242:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 246:	88 23       	and	r24, r24
+ 248:	e4 f7       	brge	.-8      	; 0x242 <I2C_ReadAck+0x6>
+	
+	return TWDR;
+ 24a:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+}
+ 24e:	08 95       	ret
+
+00000250 <I2C_ReadNack>:
+
+// Odczyt bez bitu ACK
+uint8_t I2C_ReadNack(void)
+{
+	// Read data with NACK
+	TWCR = (1 << TWEN) | (1 << TWINT);
+ 250:	84 e8       	ldi	r24, 0x84	; 132
+ 252:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+	
+	while (!(TWCR & (1 << TWINT)));
+ 256:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 25a:	88 23       	and	r24, r24
+ 25c:	e4 f7       	brge	.-8      	; 0x256 <I2C_ReadNack+0x6>
+	
+	return TWDR;
+ 25e:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 262:	08 95       	ret
+
+00000264 <LineSensor_Init>:
 #include "LineSensor.h"
 
 
 void LineSensor_Init(void)
 {
 	DDRC &= ~((1 << PC0) | (1 << PC1)); // Input on pin 0 and 1 of port C
- 1ce:	87 b1       	in	r24, 0x07	; 7
- 1d0:	8c 7f       	andi	r24, 0xFC	; 252
- 1d2:	87 b9       	out	0x07, r24	; 7
- 1d4:	08 95       	ret
+ 264:	87 b1       	in	r24, 0x07	; 7
+ 266:	8c 7f       	andi	r24, 0xFC	; 252
+ 268:	87 b9       	out	0x07, r24	; 7
+ 26a:	08 95       	ret
 
-000001d6 <LineSensor_Read>:
+0000026c <LineSensor_Read>:
 	//PORTC &= ~((1 << PC0) | (1 << PC1)); wlacz&/wylacz| pull up
 }
 
 uint8_t LineSensor_Read(void)
 {
 	if ((PINC & (1 << PC0)) || (PINC & (1 << PC1))) // If one of the line sensors outputs is high
- 1d6:	30 99       	sbic	0x06, 0	; 6
- 1d8:	07 c0       	rjmp	.+14     	; 0x1e8 <LineSensor_Read+0x12>
- 1da:	96 b1       	in	r25, 0x06	; 6
- 1dc:	89 2f       	mov	r24, r25
- 1de:	82 70       	andi	r24, 0x02	; 2
- 1e0:	91 ff       	sbrs	r25, 1
- 1e2:	03 c0       	rjmp	.+6      	; 0x1ea <LineSensor_Read+0x14>
+ 26c:	30 99       	sbic	0x06, 0	; 6
+ 26e:	07 c0       	rjmp	.+14     	; 0x27e <LineSensor_Read+0x12>
+ 270:	96 b1       	in	r25, 0x06	; 6
+ 272:	89 2f       	mov	r24, r25
+ 274:	82 70       	andi	r24, 0x02	; 2
+ 276:	91 ff       	sbrs	r25, 1
+ 278:	03 c0       	rjmp	.+6      	; 0x280 <LineSensor_Read+0x14>
 	{
 		return LINE;
- 1e4:	81 e0       	ldi	r24, 0x01	; 1
- 1e6:	08 95       	ret
- 1e8:	81 e0       	ldi	r24, 0x01	; 1
+ 27a:	81 e0       	ldi	r24, 0x01	; 1
+ 27c:	08 95       	ret
+ 27e:	81 e0       	ldi	r24, 0x01	; 1
 	}
 	else
 	{
 		return NOLINE;
 	}
- 1ea:	08 95       	ret
+ 280:	08 95       	ret
 
-000001ec <__vector_13>:
+00000282 <__vector_13>:
 		}
 	}
 }
 
 ISR(TIMER1_OVF_vect)
 {
- 1ec:	1f 92       	push	r1
- 1ee:	0f 92       	push	r0
- 1f0:	0f b6       	in	r0, 0x3f	; 63
- 1f2:	0f 92       	push	r0
- 1f4:	11 24       	eor	r1, r1
- 1f6:	2f 93       	push	r18
- 1f8:	3f 93       	push	r19
- 1fa:	4f 93       	push	r20
- 1fc:	5f 93       	push	r21
- 1fe:	6f 93       	push	r22
- 200:	7f 93       	push	r23
- 202:	8f 93       	push	r24
- 204:	9f 93       	push	r25
- 206:	af 93       	push	r26
- 208:	bf 93       	push	r27
- 20a:	ef 93       	push	r30
- 20c:	ff 93       	push	r31
+ 282:	1f 92       	push	r1
+ 284:	0f 92       	push	r0
+ 286:	0f b6       	in	r0, 0x3f	; 63
+ 288:	0f 92       	push	r0
+ 28a:	11 24       	eor	r1, r1
+ 28c:	2f 93       	push	r18
+ 28e:	3f 93       	push	r19
+ 290:	4f 93       	push	r20
+ 292:	5f 93       	push	r21
+ 294:	6f 93       	push	r22
+ 296:	7f 93       	push	r23
+ 298:	8f 93       	push	r24
+ 29a:	9f 93       	push	r25
+ 29c:	af 93       	push	r26
+ 29e:	bf 93       	push	r27
+ 2a0:	ef 93       	push	r30
+ 2a2:	ff 93       	push	r31
 	if(LineSensor_Read()==0)
- 20e:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <LineSensor_Read>
- 212:	81 11       	cpse	r24, r1
- 214:	03 c0       	rjmp	.+6      	; 0x21c <__vector_13+0x30>
+ 2a4:	0e 94 36 01 	call	0x26c	; 0x26c <LineSensor_Read>
+ 2a8:	81 11       	cpse	r24, r1
+ 2aa:	03 c0       	rjmp	.+6      	; 0x2b2 <__vector_13+0x30>
 	{
-		current_direction = DIRECTION_FORWARD;
- 216:	81 e0       	ldi	r24, 0x01	; 1
- 218:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+		current_direction = DIRECTION_BACKWARD;
+ 2ac:	85 e0       	ldi	r24, 0x05	; 5
+ 2ae:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+	}
 	
-	//distance1 = DistanceSensor_Read(SENSOR1_ADDR); // Central right
-	//distance2 = DistanceSensor_Read(SENSOR2_ADDR); // Central left
-	//distance3 = DistanceSensor_Read(SENSOR3_ADDR); // Right side
-	//distance4 = DistanceSensor_Read(SENSOR4_ADDR); // Left side
+	distance1 = DistanceSensor_Read(SENSOR1_ADDR); // Central right
+ 2b2:	80 e3       	ldi	r24, 0x30	; 48
+ 2b4:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <DistanceSensor_Read>
+ 2b8:	90 93 06 01 	sts	0x0106, r25	; 0x800106 <distance1+0x1>
+ 2bc:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <distance1>
+	distance2 = DistanceSensor_Read(SENSOR2_ADDR); // Central left
+ 2c0:	81 e3       	ldi	r24, 0x31	; 49
+ 2c2:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <DistanceSensor_Read>
+ 2c6:	90 93 08 01 	sts	0x0108, r25	; 0x800108 <distance2+0x1>
+ 2ca:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <distance2>
+	distance3 = DistanceSensor_Read(SENSOR3_ADDR); // Right side
+ 2ce:	82 e3       	ldi	r24, 0x32	; 50
+ 2d0:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <DistanceSensor_Read>
+ 2d4:	90 93 02 01 	sts	0x0102, r25	; 0x800102 <distance3+0x1>
+ 2d8:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <distance3>
+	distance4 = DistanceSensor_Read(SENSOR4_ADDR); // Left side
+ 2dc:	83 e3       	ldi	r24, 0x33	; 51
+ 2de:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <DistanceSensor_Read>
+ 2e2:	90 93 04 01 	sts	0x0104, r25	; 0x800104 <distance4+0x1>
+ 2e6:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <distance4>
 }
- 21c:	ff 91       	pop	r31
- 21e:	ef 91       	pop	r30
- 220:	bf 91       	pop	r27
- 222:	af 91       	pop	r26
- 224:	9f 91       	pop	r25
- 226:	8f 91       	pop	r24
- 228:	7f 91       	pop	r23
- 22a:	6f 91       	pop	r22
- 22c:	5f 91       	pop	r21
- 22e:	4f 91       	pop	r20
- 230:	3f 91       	pop	r19
- 232:	2f 91       	pop	r18
- 234:	0f 90       	pop	r0
- 236:	0f be       	out	0x3f, r0	; 63
- 238:	0f 90       	pop	r0
- 23a:	1f 90       	pop	r1
- 23c:	18 95       	reti
+ 2ea:	ff 91       	pop	r31
+ 2ec:	ef 91       	pop	r30
+ 2ee:	bf 91       	pop	r27
+ 2f0:	af 91       	pop	r26
+ 2f2:	9f 91       	pop	r25
+ 2f4:	8f 91       	pop	r24
+ 2f6:	7f 91       	pop	r23
+ 2f8:	6f 91       	pop	r22
+ 2fa:	5f 91       	pop	r21
+ 2fc:	4f 91       	pop	r20
+ 2fe:	3f 91       	pop	r19
+ 300:	2f 91       	pop	r18
+ 302:	0f 90       	pop	r0
+ 304:	0f be       	out	0x3f, r0	; 63
+ 306:	0f 90       	pop	r0
+ 308:	1f 90       	pop	r1
+ 30a:	18 95       	reti
 
-0000023e <TimeBase_Init>:
+0000030c <TimeBase_Init>:
 
 void TimeBase_Init(void)
 {
-	//inicjalizacja podzialu czasu SysTick
+	//inicjalizacja podzialu czasu typu SysTick
 	TIMSK1 |= (1<<TOIE1);
- 23e:	ef e6       	ldi	r30, 0x6F	; 111
- 240:	f0 e0       	ldi	r31, 0x00	; 0
- 242:	80 81       	ld	r24, Z
- 244:	81 60       	ori	r24, 0x01	; 1
- 246:	80 83       	st	Z, r24
+ 30c:	ef e6       	ldi	r30, 0x6F	; 111
+ 30e:	f0 e0       	ldi	r31, 0x00	; 0
+ 310:	80 81       	ld	r24, Z
+ 312:	81 60       	ori	r24, 0x01	; 1
+ 314:	80 83       	st	Z, r24
 	TCCR1B |= (1 << CS12); //256 presc 16 000 000 / 256 = 62 500 Hz = 0,016 ms = 16us
- 248:	e1 e8       	ldi	r30, 0x81	; 129
- 24a:	f0 e0       	ldi	r31, 0x00	; 0
- 24c:	80 81       	ld	r24, Z
- 24e:	84 60       	ori	r24, 0x04	; 4
- 250:	80 83       	st	Z, r24
- 252:	08 95       	ret
+ 316:	e1 e8       	ldi	r30, 0x81	; 129
+ 318:	f0 e0       	ldi	r31, 0x00	; 0
+ 31a:	80 81       	ld	r24, Z
+ 31c:	84 60       	ori	r24, 0x04	; 4
+ 31e:	80 83       	st	Z, r24
+ 320:	08 95       	ret
 
-00000254 <main>:
+00000322 <main>:
 volatile uint16_t distance4;
 volatile uint8_t current_direction;
 	
 int main(void)
 {
 	sei(); // W³¹czenie przerwañ, 
- 254:	78 94       	sei
+ 322:	78 94       	sei
 	
 	// Inicjalizacja silników
 	Motor_Init(); 
- 256:	0e 94 90 01 	call	0x320	; 0x320 <Motor_Init>
+ 324:	0e 94 f3 01 	call	0x3e6	; 0x3e6 <Motor_Init>
 	//Inicjalizacja sensorow linii
 	LineSensor_Init();
- 25a:	0e 94 e7 00 	call	0x1ce	; 0x1ce <LineSensor_Init>
+ 328:	0e 94 32 01 	call	0x264	; 0x264 <LineSensor_Init>
 	//Inicjalizacja sensorow dystansu
 	DistanceSensor_Init();
- 25e:	0e 94 94 00 	call	0x128	; 0x128 <DistanceSensor_Init>
+ 32c:	0e 94 94 00 	call	0x128	; 0x128 <DistanceSensor_Init>
 	//Inicjalizacja podzialu czasu
 	TimeBase_Init();
- 262:	0e 94 1f 01 	call	0x23e	; 0x23e <TimeBase_Init>
+ 330:	0e 94 86 01 	call	0x30c	; 0x30c <TimeBase_Init>
 	
 	while (1)
 	{	
 		// Prosta logika sterowania silnikami
-		if (distance1 < 100 || distance2 < 100) // Przeszkoda z przodu
- 266:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <distance1>
- 26a:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <distance1+0x1>
- 26e:	84 36       	cpi	r24, 0x64	; 100
- 270:	91 05       	cpc	r25, r1
- 272:	38 f0       	brcs	.+14     	; 0x282 <main+0x2e>
- 274:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <distance2>
- 278:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <distance2+0x1>
- 27c:	84 36       	cpi	r24, 0x64	; 100
- 27e:	91 05       	cpc	r25, r1
- 280:	20 f4       	brcc	.+8      	; 0x28a <main+0x36>
+		if (distance1 < 20 || distance2 < 20) // Przeszkoda z przodu
+ 334:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <distance1>
+ 338:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <distance1+0x1>
+ 33c:	44 97       	sbiw	r24, 0x14	; 20
+ 33e:	30 f0       	brcs	.+12     	; 0x34c <main+0x2a>
+ 340:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <distance2>
+ 344:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <distance2+0x1>
+ 348:	44 97       	sbiw	r24, 0x14	; 20
+ 34a:	20 f4       	brcc	.+8      	; 0x354 <main+0x32>
 		{
 		current_direction = DIRECTION_FORWARD;
- 282:	81 e0       	ldi	r24, 0x01	; 1
- 284:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
- 288:	19 c0       	rjmp	.+50     	; 0x2bc <main+0x68>
+ 34c:	81 e0       	ldi	r24, 0x01	; 1
+ 34e:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 352:	17 c0       	rjmp	.+46     	; 0x382 <main+0x60>
 		}
-		else if (distance3 < 100) // Przeszkoda z prawej strony
- 28a:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <distance3>
- 28e:	90 91 02 01 	lds	r25, 0x0102	; 0x800102 <distance3+0x1>
- 292:	84 36       	cpi	r24, 0x64	; 100
- 294:	91 05       	cpc	r25, r1
- 296:	20 f4       	brcc	.+8      	; 0x2a0 <main+0x4c>
+		else if (distance3 < 20) // Przeszkoda z prawej strony
+ 354:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <distance3>
+ 358:	90 91 02 01 	lds	r25, 0x0102	; 0x800102 <distance3+0x1>
+ 35c:	44 97       	sbiw	r24, 0x14	; 20
+ 35e:	20 f4       	brcc	.+8      	; 0x368 <main+0x46>
 		{
 		current_direction = DIRECTION_RIGHT;
- 298:	82 e0       	ldi	r24, 0x02	; 2
- 29a:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
- 29e:	0e c0       	rjmp	.+28     	; 0x2bc <main+0x68>
+ 360:	82 e0       	ldi	r24, 0x02	; 2
+ 362:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 366:	0d c0       	rjmp	.+26     	; 0x382 <main+0x60>
 		}
-		else if (distance4 < 100) // Przeszkoda z lewej strony
- 2a0:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <distance4>
- 2a4:	90 91 04 01 	lds	r25, 0x0104	; 0x800104 <distance4+0x1>
- 2a8:	84 36       	cpi	r24, 0x64	; 100
- 2aa:	91 05       	cpc	r25, r1
- 2ac:	20 f4       	brcc	.+8      	; 0x2b6 <main+0x62>
+		else if (distance4 < 20) // Przeszkoda z lewej strony
+ 368:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <distance4>
+ 36c:	90 91 04 01 	lds	r25, 0x0104	; 0x800104 <distance4+0x1>
+ 370:	44 97       	sbiw	r24, 0x14	; 20
+ 372:	20 f4       	brcc	.+8      	; 0x37c <main+0x5a>
 		{
 		current_direction = DIRECTION_LEFT;
- 2ae:	83 e0       	ldi	r24, 0x03	; 3
- 2b0:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
- 2b4:	03 c0       	rjmp	.+6      	; 0x2bc <main+0x68>
+ 374:	83 e0       	ldi	r24, 0x03	; 3
+ 376:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 37a:	03 c0       	rjmp	.+6      	; 0x382 <main+0x60>
 		}
 		else
 		{
 		current_direction = DIRECTION_CIRCLE;
- 2b6:	84 e0       	ldi	r24, 0x04	; 4
- 2b8:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 37c:	84 e0       	ldi	r24, 0x04	; 4
+ 37e:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
 		}
 		
 		switch (current_direction)
- 2bc:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
- 2c0:	83 30       	cpi	r24, 0x03	; 3
- 2c2:	89 f0       	breq	.+34     	; 0x2e6 <main+0x92>
- 2c4:	28 f4       	brcc	.+10     	; 0x2d0 <main+0x7c>
- 2c6:	81 30       	cpi	r24, 0x01	; 1
- 2c8:	41 f0       	breq	.+16     	; 0x2da <main+0x86>
- 2ca:	82 30       	cpi	r24, 0x02	; 2
- 2cc:	49 f0       	breq	.+18     	; 0x2e0 <main+0x8c>
- 2ce:	cb cf       	rjmp	.-106    	; 0x266 <main+0x12>
- 2d0:	84 30       	cpi	r24, 0x04	; 4
- 2d2:	61 f0       	breq	.+24     	; 0x2ec <main+0x98>
- 2d4:	85 30       	cpi	r24, 0x05	; 5
- 2d6:	69 f0       	breq	.+26     	; 0x2f2 <main+0x9e>
- 2d8:	c6 cf       	rjmp	.-116    	; 0x266 <main+0x12>
+ 382:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 386:	83 30       	cpi	r24, 0x03	; 3
+ 388:	89 f0       	breq	.+34     	; 0x3ac <main+0x8a>
+ 38a:	28 f4       	brcc	.+10     	; 0x396 <main+0x74>
+ 38c:	81 30       	cpi	r24, 0x01	; 1
+ 38e:	41 f0       	breq	.+16     	; 0x3a0 <main+0x7e>
+ 390:	82 30       	cpi	r24, 0x02	; 2
+ 392:	49 f0       	breq	.+18     	; 0x3a6 <main+0x84>
+ 394:	cf cf       	rjmp	.-98     	; 0x334 <main+0x12>
+ 396:	84 30       	cpi	r24, 0x04	; 4
+ 398:	61 f0       	breq	.+24     	; 0x3b2 <main+0x90>
+ 39a:	85 30       	cpi	r24, 0x05	; 5
+ 39c:	69 f0       	breq	.+26     	; 0x3b8 <main+0x96>
+ 39e:	ca cf       	rjmp	.-108    	; 0x334 <main+0x12>
 		{
 			case DIRECTION_FORWARD:
 			Motor_Straight();
- 2da:	0e 94 a9 01 	call	0x352	; 0x352 <Motor_Straight>
+ 3a0:	0e 94 0c 02 	call	0x418	; 0x418 <Motor_Straight>
 			break;
- 2de:	c3 cf       	rjmp	.-122    	; 0x266 <main+0x12>
+ 3a4:	c7 cf       	rjmp	.-114    	; 0x334 <main+0x12>
 			case DIRECTION_RIGHT:
 			Motor_Right();
- 2e0:	0e 94 ca 01 	call	0x394	; 0x394 <Motor_Right>
+ 3a6:	0e 94 2d 02 	call	0x45a	; 0x45a <Motor_Right>
 			break;
- 2e4:	c0 cf       	rjmp	.-128    	; 0x266 <main+0x12>
+ 3aa:	c4 cf       	rjmp	.-120    	; 0x334 <main+0x12>
 			case DIRECTION_LEFT:
 			Motor_Left();
- 2e6:	0e 94 b9 01 	call	0x372	; 0x372 <Motor_Left>
+ 3ac:	0e 94 1c 02 	call	0x438	; 0x438 <Motor_Left>
 			break;
- 2ea:	bd cf       	rjmp	.-134    	; 0x266 <main+0x12>
+ 3b0:	c1 cf       	rjmp	.-126    	; 0x334 <main+0x12>
 			case DIRECTION_CIRCLE:
 			Motor_Circle();
- 2ec:	0e 94 db 01 	call	0x3b6	; 0x3b6 <Motor_Circle>
+ 3b2:	0e 94 3e 02 	call	0x47c	; 0x47c <Motor_Circle>
 			break;
- 2f0:	ba cf       	rjmp	.-140    	; 0x266 <main+0x12>
+ 3b6:	be cf       	rjmp	.-132    	; 0x334 <main+0x12>
 			case DIRECTION_BACKWARD:
 			Motor_Backwards();
- 2f2:	0e 94 99 01 	call	0x332	; 0x332 <Motor_Backwards>
+ 3b8:	0e 94 fc 01 	call	0x3f8	; 0x3f8 <Motor_Backwards>
 			break;
- 2f6:	b7 cf       	rjmp	.-146    	; 0x266 <main+0x12>
+ 3bc:	bb cf       	rjmp	.-138    	; 0x334 <main+0x12>
 
-000002f8 <Timer0_Init>:
+000003be <Timer0_Init>:
 
   // Inicjalizacja Timer0 do generowania PWM na PD6 (OC0A) i PD5 (OC0B)
   void Timer0_Init()
   {
 	  // Ustawienie Fast PWM (WGM02 = 0, WGM01 = 1, WGM00 = 1)
 	  TCCR0A = 0;
- 2f8:	14 bc       	out	0x24, r1	; 36
+ 3be:	14 bc       	out	0x24, r1	; 36
 	  TCCR0B = 0;
- 2fa:	15 bc       	out	0x25, r1	; 37
+ 3c0:	15 bc       	out	0x25, r1	; 37
 	  TCCR0A |= (1 << WGM00) | (1 << WGM01);
- 2fc:	84 b5       	in	r24, 0x24	; 36
- 2fe:	83 60       	ori	r24, 0x03	; 3
- 300:	84 bd       	out	0x24, r24	; 36
+ 3c2:	84 b5       	in	r24, 0x24	; 36
+ 3c4:	83 60       	ori	r24, 0x03	; 3
+ 3c6:	84 bd       	out	0x24, r24	; 36
 	  TCCR0B &= ~(1 << WGM02); // Upewnij siê, ¿e WGM02 jest wyzerowane
- 302:	85 b5       	in	r24, 0x25	; 37
- 304:	87 7f       	andi	r24, 0xF7	; 247
- 306:	85 bd       	out	0x25, r24	; 37
+ 3c8:	85 b5       	in	r24, 0x25	; 37
+ 3ca:	87 7f       	andi	r24, 0xF7	; 247
+ 3cc:	85 bd       	out	0x25, r24	; 37
 	  TCCR0B |= (1 << CS01) | (1 << CS00);  // Prescaler 64
- 308:	85 b5       	in	r24, 0x25	; 37
- 30a:	83 60       	ori	r24, 0x03	; 3
- 30c:	85 bd       	out	0x25, r24	; 37
+ 3ce:	85 b5       	in	r24, 0x25	; 37
+ 3d0:	83 60       	ori	r24, 0x03	; 3
+ 3d2:	85 bd       	out	0x25, r24	; 37
 
 	  // W³¹czenie PWM na OC0A (PD6) i OC0B (PD5), tryb nieodwracaj¹cy
 	  TCCR0A |= (1 << COM0A1) | (1 << COM0B1);
- 30e:	84 b5       	in	r24, 0x24	; 36
- 310:	80 6a       	ori	r24, 0xA0	; 160
- 312:	84 bd       	out	0x24, r24	; 36
+ 3d4:	84 b5       	in	r24, 0x24	; 36
+ 3d6:	80 6a       	ori	r24, 0xA0	; 160
+ 3d8:	84 bd       	out	0x24, r24	; 36
 
 	  // Ustawienie pocz¹tkowego wype³nienia PWM na 0 (silniki wy³¹czone)
 	  OCR0A = 0;
- 314:	17 bc       	out	0x27, r1	; 39
+ 3da:	17 bc       	out	0x27, r1	; 39
 	  OCR0B = 0;
- 316:	18 bc       	out	0x28, r1	; 40
+ 3dc:	18 bc       	out	0x28, r1	; 40
 
 	  // Ustawienie PD6 i PD5 jako wyjœcia (PWM)
 	  DDRD |= (1 << PD6) | (1 << PD5);
- 318:	8a b1       	in	r24, 0x0a	; 10
- 31a:	80 66       	ori	r24, 0x60	; 96
- 31c:	8a b9       	out	0x0a, r24	; 10
- 31e:	08 95       	ret
+ 3de:	8a b1       	in	r24, 0x0a	; 10
+ 3e0:	80 66       	ori	r24, 0x60	; 96
+ 3e2:	8a b9       	out	0x0a, r24	; 10
+ 3e4:	08 95       	ret
 
-00000320 <Motor_Init>:
+000003e6 <Motor_Init>:
   }
 
   // Inicjalizacja pinów kierunku (DIR_1 i DIR_2 dla obu silników)
   void Motor_Init()
   {
 	  Timer0_Init();
- 320:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <Timer0_Init>
+ 3e6:	0e 94 df 01 	call	0x3be	; 0x3be <Timer0_Init>
 	  // Ustawienie PC2, PC3 (lewy silnik) i PD4, PD7 (prawy silnik) jako wyjœcia
 	  DDRC |= (1 << PC2) | (1 << PC3);
- 324:	87 b1       	in	r24, 0x07	; 7
- 326:	8c 60       	ori	r24, 0x0C	; 12
- 328:	87 b9       	out	0x07, r24	; 7
+ 3ea:	87 b1       	in	r24, 0x07	; 7
+ 3ec:	8c 60       	ori	r24, 0x0C	; 12
+ 3ee:	87 b9       	out	0x07, r24	; 7
 	  DDRD |= (1 << PD4) | (1 << PD7);
- 32a:	8a b1       	in	r24, 0x0a	; 10
- 32c:	80 69       	ori	r24, 0x90	; 144
- 32e:	8a b9       	out	0x0a, r24	; 10
- 330:	08 95       	ret
+ 3f0:	8a b1       	in	r24, 0x0a	; 10
+ 3f2:	80 69       	ori	r24, 0x90	; 144
+ 3f4:	8a b9       	out	0x0a, r24	; 10
+ 3f6:	08 95       	ret
 
-00000332 <Motor_Backwards>:
+000003f8 <Motor_Backwards>:
   }
   
   void Motor_Backwards(void)
   {
 	  //kierunek w tyl
 	  PORTD &= ~(1 << PD4);
- 332:	8b b1       	in	r24, 0x0b	; 11
- 334:	8f 7e       	andi	r24, 0xEF	; 239
- 336:	8b b9       	out	0x0b, r24	; 11
+ 3f8:	8b b1       	in	r24, 0x0b	; 11
+ 3fa:	8f 7e       	andi	r24, 0xEF	; 239
+ 3fc:	8b b9       	out	0x0b, r24	; 11
 	  PORTD |= (1 << PD7);
- 338:	8b b1       	in	r24, 0x0b	; 11
- 33a:	80 68       	ori	r24, 0x80	; 128
- 33c:	8b b9       	out	0x0b, r24	; 11
+ 3fe:	8b b1       	in	r24, 0x0b	; 11
+ 400:	80 68       	ori	r24, 0x80	; 128
+ 402:	8b b9       	out	0x0b, r24	; 11
 	  PORTC &= ~(1 << PC2);
- 33e:	88 b1       	in	r24, 0x08	; 8
- 340:	8b 7f       	andi	r24, 0xFB	; 251
- 342:	88 b9       	out	0x08, r24	; 8
+ 404:	88 b1       	in	r24, 0x08	; 8
+ 406:	8b 7f       	andi	r24, 0xFB	; 251
+ 408:	88 b9       	out	0x08, r24	; 8
 	  PORTC |= (1 << PC3);
- 344:	88 b1       	in	r24, 0x08	; 8
- 346:	88 60       	ori	r24, 0x08	; 8
- 348:	88 b9       	out	0x08, r24	; 8
+ 40a:	88 b1       	in	r24, 0x08	; 8
+ 40c:	88 60       	ori	r24, 0x08	; 8
+ 40e:	88 b9       	out	0x08, r24	; 8
 	  
 	  OCR0A = 255;    // Pe³na moc dla lewego silnika
- 34a:	8f ef       	ldi	r24, 0xFF	; 255
- 34c:	87 bd       	out	0x27, r24	; 39
+ 410:	8f ef       	ldi	r24, 0xFF	; 255
+ 412:	87 bd       	out	0x27, r24	; 39
 	  OCR0B = 255;  // Pe³na moc dla prawego silnika	  
- 34e:	88 bd       	out	0x28, r24	; 40
- 350:	08 95       	ret
+ 414:	88 bd       	out	0x28, r24	; 40
+ 416:	08 95       	ret
 
-00000352 <Motor_Straight>:
+00000418 <Motor_Straight>:
   }
   
   void Motor_Straight(void)
   {
 	  //kierunek w przod
 	  PORTD |= (1 << PD4);
- 352:	8b b1       	in	r24, 0x0b	; 11
- 354:	80 61       	ori	r24, 0x10	; 16
- 356:	8b b9       	out	0x0b, r24	; 11
+ 418:	8b b1       	in	r24, 0x0b	; 11
+ 41a:	80 61       	ori	r24, 0x10	; 16
+ 41c:	8b b9       	out	0x0b, r24	; 11
 	  PORTD &= ~(1 << PD7);
- 358:	8b b1       	in	r24, 0x0b	; 11
- 35a:	8f 77       	andi	r24, 0x7F	; 127
- 35c:	8b b9       	out	0x0b, r24	; 11
+ 41e:	8b b1       	in	r24, 0x0b	; 11
+ 420:	8f 77       	andi	r24, 0x7F	; 127
+ 422:	8b b9       	out	0x0b, r24	; 11
 	  PORTC |= (1 << PC2);
- 35e:	88 b1       	in	r24, 0x08	; 8
- 360:	84 60       	ori	r24, 0x04	; 4
- 362:	88 b9       	out	0x08, r24	; 8
+ 424:	88 b1       	in	r24, 0x08	; 8
+ 426:	84 60       	ori	r24, 0x04	; 4
+ 428:	88 b9       	out	0x08, r24	; 8
 	  PORTC &= ~(1 << PC3);
- 364:	88 b1       	in	r24, 0x08	; 8
- 366:	87 7f       	andi	r24, 0xF7	; 247
- 368:	88 b9       	out	0x08, r24	; 8
+ 42a:	88 b1       	in	r24, 0x08	; 8
+ 42c:	87 7f       	andi	r24, 0xF7	; 247
+ 42e:	88 b9       	out	0x08, r24	; 8
 	  
 	  OCR0A = 255;    // Pe³na moc dla lewego silnika
- 36a:	8f ef       	ldi	r24, 0xFF	; 255
- 36c:	87 bd       	out	0x27, r24	; 39
+ 430:	8f ef       	ldi	r24, 0xFF	; 255
+ 432:	87 bd       	out	0x27, r24	; 39
 	  OCR0B = 255;  // Pe³na moc dla prawego silnika
- 36e:	88 bd       	out	0x28, r24	; 40
- 370:	08 95       	ret
+ 434:	88 bd       	out	0x28, r24	; 40
+ 436:	08 95       	ret
 
-00000372 <Motor_Left>:
+00000438 <Motor_Left>:
   }
   
   void Motor_Left(void)
   {
 	  //kierunek w przod
 	  PORTD |= (1 << PD4);
- 372:	8b b1       	in	r24, 0x0b	; 11
- 374:	80 61       	ori	r24, 0x10	; 16
- 376:	8b b9       	out	0x0b, r24	; 11
+ 438:	8b b1       	in	r24, 0x0b	; 11
+ 43a:	80 61       	ori	r24, 0x10	; 16
+ 43c:	8b b9       	out	0x0b, r24	; 11
 	  PORTD &= ~(1 << PD7);
- 378:	8b b1       	in	r24, 0x0b	; 11
- 37a:	8f 77       	andi	r24, 0x7F	; 127
- 37c:	8b b9       	out	0x0b, r24	; 11
+ 43e:	8b b1       	in	r24, 0x0b	; 11
+ 440:	8f 77       	andi	r24, 0x7F	; 127
+ 442:	8b b9       	out	0x0b, r24	; 11
 	  PORTC |= (1 << PC2);
- 37e:	88 b1       	in	r24, 0x08	; 8
- 380:	84 60       	ori	r24, 0x04	; 4
- 382:	88 b9       	out	0x08, r24	; 8
+ 444:	88 b1       	in	r24, 0x08	; 8
+ 446:	84 60       	ori	r24, 0x04	; 4
+ 448:	88 b9       	out	0x08, r24	; 8
 	  PORTC &= ~(1 << PC3);
- 384:	88 b1       	in	r24, 0x08	; 8
- 386:	87 7f       	andi	r24, 0xF7	; 247
- 388:	88 b9       	out	0x08, r24	; 8
+ 44a:	88 b1       	in	r24, 0x08	; 8
+ 44c:	87 7f       	andi	r24, 0xF7	; 247
+ 44e:	88 b9       	out	0x08, r24	; 8
 	  
 	  OCR0A = 128;    
- 38a:	80 e8       	ldi	r24, 0x80	; 128
- 38c:	87 bd       	out	0x27, r24	; 39
+ 450:	80 e8       	ldi	r24, 0x80	; 128
+ 452:	87 bd       	out	0x27, r24	; 39
 	  OCR0B = 255;	// Pe³na moc dla prawego silnika
- 38e:	8f ef       	ldi	r24, 0xFF	; 255
- 390:	88 bd       	out	0x28, r24	; 40
- 392:	08 95       	ret
+ 454:	8f ef       	ldi	r24, 0xFF	; 255
+ 456:	88 bd       	out	0x28, r24	; 40
+ 458:	08 95       	ret
 
-00000394 <Motor_Right>:
+0000045a <Motor_Right>:
   }
   
   void Motor_Right(void)
   {
 	  //kierunek w przod
 	  PORTD |= (1 << PD4);
- 394:	8b b1       	in	r24, 0x0b	; 11
- 396:	80 61       	ori	r24, 0x10	; 16
- 398:	8b b9       	out	0x0b, r24	; 11
+ 45a:	8b b1       	in	r24, 0x0b	; 11
+ 45c:	80 61       	ori	r24, 0x10	; 16
+ 45e:	8b b9       	out	0x0b, r24	; 11
 	  PORTD &= ~(1 << PD7);
- 39a:	8b b1       	in	r24, 0x0b	; 11
- 39c:	8f 77       	andi	r24, 0x7F	; 127
- 39e:	8b b9       	out	0x0b, r24	; 11
+ 460:	8b b1       	in	r24, 0x0b	; 11
+ 462:	8f 77       	andi	r24, 0x7F	; 127
+ 464:	8b b9       	out	0x0b, r24	; 11
 	  PORTC |= (1 << PC2);
- 3a0:	88 b1       	in	r24, 0x08	; 8
- 3a2:	84 60       	ori	r24, 0x04	; 4
- 3a4:	88 b9       	out	0x08, r24	; 8
+ 466:	88 b1       	in	r24, 0x08	; 8
+ 468:	84 60       	ori	r24, 0x04	; 4
+ 46a:	88 b9       	out	0x08, r24	; 8
 	  PORTC &= ~(1 << PC3);
- 3a6:	88 b1       	in	r24, 0x08	; 8
- 3a8:	87 7f       	andi	r24, 0xF7	; 247
- 3aa:	88 b9       	out	0x08, r24	; 8
+ 46c:	88 b1       	in	r24, 0x08	; 8
+ 46e:	87 7f       	andi	r24, 0xF7	; 247
+ 470:	88 b9       	out	0x08, r24	; 8
 	  
 	  OCR0A = 255;   // Pe³na moc dla lewego silnika 
- 3ac:	8f ef       	ldi	r24, 0xFF	; 255
- 3ae:	87 bd       	out	0x27, r24	; 39
+ 472:	8f ef       	ldi	r24, 0xFF	; 255
+ 474:	87 bd       	out	0x27, r24	; 39
 	  OCR0B = 128;	
- 3b0:	80 e8       	ldi	r24, 0x80	; 128
- 3b2:	88 bd       	out	0x28, r24	; 40
- 3b4:	08 95       	ret
+ 476:	80 e8       	ldi	r24, 0x80	; 128
+ 478:	88 bd       	out	0x28, r24	; 40
+ 47a:	08 95       	ret
 
-000003b6 <Motor_Circle>:
+0000047c <Motor_Circle>:
   }
   
   void Motor_Circle(void)
   {
 	  PORTD &= ~(1 << PD4);
- 3b6:	8b b1       	in	r24, 0x0b	; 11
- 3b8:	8f 7e       	andi	r24, 0xEF	; 239
- 3ba:	8b b9       	out	0x0b, r24	; 11
+ 47c:	8b b1       	in	r24, 0x0b	; 11
+ 47e:	8f 7e       	andi	r24, 0xEF	; 239
+ 480:	8b b9       	out	0x0b, r24	; 11
 	  PORTD |= (1 << PD7);
- 3bc:	8b b1       	in	r24, 0x0b	; 11
- 3be:	80 68       	ori	r24, 0x80	; 128
- 3c0:	8b b9       	out	0x0b, r24	; 11
+ 482:	8b b1       	in	r24, 0x0b	; 11
+ 484:	80 68       	ori	r24, 0x80	; 128
+ 486:	8b b9       	out	0x0b, r24	; 11
 	  PORTC |= (1 << PC2);
- 3c2:	88 b1       	in	r24, 0x08	; 8
- 3c4:	84 60       	ori	r24, 0x04	; 4
- 3c6:	88 b9       	out	0x08, r24	; 8
+ 488:	88 b1       	in	r24, 0x08	; 8
+ 48a:	84 60       	ori	r24, 0x04	; 4
+ 48c:	88 b9       	out	0x08, r24	; 8
 	  PORTC &= ~(1 << PC3);
- 3c8:	88 b1       	in	r24, 0x08	; 8
- 3ca:	87 7f       	andi	r24, 0xF7	; 247
- 3cc:	88 b9       	out	0x08, r24	; 8
+ 48e:	88 b1       	in	r24, 0x08	; 8
+ 490:	87 7f       	andi	r24, 0xF7	; 247
+ 492:	88 b9       	out	0x08, r24	; 8
 	  
 	  OCR0A = 255;    // Pe³na moc dla lewego silnika
- 3ce:	8f ef       	ldi	r24, 0xFF	; 255
- 3d0:	87 bd       	out	0x27, r24	; 39
+ 494:	8f ef       	ldi	r24, 0xFF	; 255
+ 496:	87 bd       	out	0x27, r24	; 39
 	  OCR0B = 255;  // Pe³na moc dla prawego silnika
- 3d2:	88 bd       	out	0x28, r24	; 40
- 3d4:	08 95       	ret
+ 498:	88 bd       	out	0x28, r24	; 40
+ 49a:	08 95       	ret
 
-000003d6 <_exit>:
- 3d6:	f8 94       	cli
+0000049c <_exit>:
+ 49c:	f8 94       	cli
 
-000003d8 <__stop_program>:
- 3d8:	ff cf       	rjmp	.-2      	; 0x3d8 <__stop_program>
+0000049e <__stop_program>:
+ 49e:	ff cf       	rjmp	.-2      	; 0x49e <__stop_program>

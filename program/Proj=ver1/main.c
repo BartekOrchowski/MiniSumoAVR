@@ -9,7 +9,7 @@
 #include "Motor.h"
 void TimeBase_Init(void);
 
-//moze jakis enum???
+//moze jakis union enum  cos????? pozneij
 #define DIRECTION_FORWARD 1
 #define DIRECTION_RIGHT 2
 #define DIRECTION_LEFT 3
@@ -38,15 +38,15 @@ int main(void)
 	while (1)
 	{	
 		// Prosta logika sterowania silnikami
-		if (distance1 < 100 || distance2 < 100) // Przeszkoda z przodu
+		if (distance1 < 20 || distance2 < 20) // Przeszkoda z przodu
 		{
 		current_direction = DIRECTION_FORWARD;
 		}
-		else if (distance3 < 100) // Przeszkoda z prawej strony
+		else if (distance3 < 20) // Przeszkoda z prawej strony
 		{
 		current_direction = DIRECTION_RIGHT;
 		}
-		else if (distance4 < 100) // Przeszkoda z lewej strony
+		else if (distance4 < 20) // Przeszkoda z lewej strony
 		{
 		current_direction = DIRECTION_LEFT;
 		}
@@ -80,18 +80,18 @@ ISR(TIMER1_OVF_vect)
 {
 	if(LineSensor_Read()==0)
 	{
-		current_direction = DIRECTION_FORWARD;
+		current_direction = DIRECTION_BACKWARD;
 	}
 	
-	//distance1 = DistanceSensor_Read(SENSOR1_ADDR); // Central right
-	//distance2 = DistanceSensor_Read(SENSOR2_ADDR); // Central left
-	//distance3 = DistanceSensor_Read(SENSOR3_ADDR); // Right side
-	//distance4 = DistanceSensor_Read(SENSOR4_ADDR); // Left side
+	distance1 = DistanceSensor_Read(SENSOR1_ADDR); // Central right
+	distance2 = DistanceSensor_Read(SENSOR2_ADDR); // Central left
+	distance3 = DistanceSensor_Read(SENSOR3_ADDR); // Right side
+	distance4 = DistanceSensor_Read(SENSOR4_ADDR); // Left side
 }
 
 void TimeBase_Init(void)
 {
-	//inicjalizacja podzialu czasu SysTick
+	//inicjalizacja podzialu czasu typu SysTick
 	TIMSK1 |= (1<<TOIE1);
 	TCCR1B |= (1 << CS12); //256 presc 16 000 000 / 256 = 62 500 Hz = 0,016 ms = 16us
 }
