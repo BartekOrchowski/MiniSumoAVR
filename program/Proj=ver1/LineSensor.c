@@ -11,10 +11,10 @@ uint8_t LineSensor_Read(void)
 {
 	if ((PINC & (1 << PC0)) || (PINC & (1 << PC1))) // If one of the line sensors outputs is high
 	{
-		return LINE;
+		return NOLINE;
 	}
 	else
 	{
-		return NOLINE;
+		return LINE;
 	}
 }

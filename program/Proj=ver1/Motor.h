@@ -1,7 +1,8 @@
 #pragma once 
-
+#define F_CPU 16000000UL
 #include <stdint.h>
 #include <avr/io.h>
+#include <util/delay.h>
 
   // Inicjalizacja Timer0 do generowania PWM na PD6 (OC0A) i PD5 (OC0B)
   void Timer0_Init(void);

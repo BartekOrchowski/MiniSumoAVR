@@ -92,35 +92,21 @@
 	  
   }
   
-  #ifdef TEST
+  //#ifdef TEST
    void Motor_Test(void)
    {
-	   //// Tylko lewy silnik na pe³nej mocy
-	   OCR0A = 255;  // Pe³na moc dla lewego silnika
-	   OCR0B = 128;    // Prawy silnik wy³¹czony
-	   PORTD |= (1 << PD4);
-	   PORTD &= ~(1 << PD7);
-	   PORTC |= (1 << PC2);
-	   PORTC &= ~(1 << PC3);
-	   _delay_ms(200);
-
-	   //// Tylko prawy silnik na pe³nej mocy
-	   OCR0A = 128;    // Lewy silnik wy³¹czony
-	   OCR0B = 255;  // Pe³na moc dla prawego silnika
-	   PORTD &= ~(1 << PD4);
-	   PORTD |= (1 << PD7);
-	   PORTC &= ~(1 << PC2);
-	   PORTC |= (1 << PC3);
-	   _delay_ms(200);
 	   Motor_Backwards();
-	   _delay_ms(100);
+	   _delay_ms(500);
 	   Motor_Circle();
 	   _delay_ms(100);
 	   Motor_Left();
-	   _delay_ms(100);
+	   _delay_ms(500);
 	   Motor_Right();
 	   _delay_ms(100);
 	   Motor_Straight();
+	   _delay_ms(1000);
+	   OCR0B = 0;
+	   OCR0A = 0;
 	   _delay_ms(100);
    }
-   #endif
+  // #endif
