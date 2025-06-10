@@ -1,4 +1,4 @@
-## MiniSumo Robot – ATmega328P (KoNaR Workshop Project)
+## MiniSumo Robot – ATmega328P 
 
 This project is a MiniSumo robot developed during a workshop organized by the KoNaR student scientific association. It is based on the ATmega328P microcontroller and represents my first hands-on experience with designing, assembling, and programming a robot from scratch.
 
@@ -14,13 +14,13 @@ The goal of the project was to create an autonomous MiniSumo robot that could:
 Despite the project being incomplete, several features were successfully implemented:
 - ✅ **DC motor control** using an H-bridge
 - ✅ **Distance measurement** from four VL53L0X sensors (basic functionality working)
+- ✅ **ADC** for line sensor
 
 ## Issues and Challenges
 
-Several hardware issues prevented full functionality:
+Several hardware issues:
 - ❌ Incorrect electrical connections
 - ❌ Improper wiring of XSHUT pins for the VL53L0X distance sensors
-- ❌ Faulty connections for line sensors
 
 Due to these problems, the robot was not fully operational, and the project was paused before final testing and competition.
 
