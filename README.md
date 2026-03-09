@@ -30,4 +30,3 @@ Although the current version of the robot is unfinished, I may return to this pr
 
 ---
 
-🛠️ *Made with curiosity and lots of trial and error during KoNaR workshops.*
